@@ -1,95 +1,60 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import React from 'react';
+import { Flex, Space, Row, QRCode } from 'antd';
+
+// import my components
+import DefaultMenu from './components/menu';
+import DefaultCarousel from './components/carousel';
+import DefaultStep from './components/step';
+import DefaultDescription from './components/footer';
+import DefaultMap from './components/map';
+import { SITENAME, DESCRIPTION, QRCODEURL } from './components/const';
+
+
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className="main">
+        <div id='main-menu' style={{ width: 256, zIndex: 99, position: 'fixed', top: 10, left: 10 }}>
+          <DefaultMenu />
         </div>
+
+        <Flex gap="middle" vertical>
+          <DefaultCarousel />
+
+          <h2 style={{ textAlign: 'center' }}>{SITENAME}</h2>
+          <div style={{ padding: '2rem' }}>
+            <p>{DESCRIPTION}</p>
+          </div>
+
+          <h2 style={{ textAlign: 'center' }}>対応可能地域</h2>
+          <DefaultMap />
+
+          <Row style={{ padding: '2rem' }}>
+            <DefaultStep />
+          </Row>
+        </Flex>
+
+        <Flex gap="middle" vertical>
+
+          <Space direction="vertical" align="center" style={{ padding: '2rem' }}>
+            <h2>LINEお問い合わせ</h2>
+            <QRCode value={QRCODEURL || '-'} />
+            <p><small><a href={QRCODEURL}>{QRCODEURL}</a></small></p>
+          </Space>
+        </Flex>
+
+
+        <Row style={{ padding: '2rem' }}>
+          <DefaultDescription />
+        </Row>
+        <Row style={{ padding: '2rem', textAlign: 'center' }}>
+          <p>© {new Date().getFullYear()} {SITENAME}.</p>
+        </Row>
+
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }
